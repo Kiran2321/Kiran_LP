@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome - Unauthenticated</title>
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- BEGIN LivePerson Monitor. -->
+  <script type="text/javascript">
+    window.lpTag = window.lpTag || {};
+    if (typeof window.lpTag._tagCount === 'undefined') {
+      window.lpTag = {
+        site: '9994318',
+        _tagCount: 1,
+        protocol: 'https:',
+        events: {
+          bind: function (t, e, i) {
+            lpTag.defer(function () {
+              lpTag.events.bind(t, e, i);
+            }, 0);
+          },
+          trigger: function (t, e, i) {
+            lpTag.defer(function () {
+              lpTag.events.trigger(t, e, i);
+            }, 1);
+          }
+        },
+        defer: function (t, e) {
+          e === 0 ? (this._defB = this._defB || []).push(t)
+            : e === 1 ? (this._defT = this._defT || []).push(t)
+            : (this._defL = this._defL || []).push(t);
+        },
+        load: function (t, e, i) {
+          var n = this;
+          setTimeout(function () {
+            n._load(t, e, i);
+          }, 0);
+        },
+        _load: function (t, e, i) {
+          var n = t || this.protocol + '//lptag.liveperson.net/tag/tag.js?site=' + this.site;
+          var o = document.createElement('script');
+          o.setAttribute('charset', e || 'UTF-8');
+          if (i) o.setAttribute('id', i);
+          o.setAttribute('src', n);
+          document.head.appendChild(o);
+        },
+        init: function () {
+          this._timing = this._timing || {};
+          this._timing.start = new Date().getTime();
+          var t = this;
+          if (window.attachEvent) {
+            window.attachEvent('onload', function () {
+              t._domReady('domReady');
+            });
+          } else {
+            window.addEventListener('DOMContentLoaded', function () {
+              t._domReady('contReady');
+            }, false);
+            window.addEventListener('load', function () {
+              t._domReady('domReady');
+            }, false);
+          }
+          if (typeof window._lptStop === 'undefined') this.load();
+        },
+        _domReady: function (t) {
+          if (!this.isDom) {
+            this.isDom = true;
+            this.events.trigger('LPT', 'DOM_READY', { t: t });
+          }
+          this._timing[t] = new Date().getTime();
+        },
+        vars: [],
+        dbs: [],
+        ctn: [],
+        sdes: [],
+        hooks: [],
+        identities: [],
+        ev: []
+      };
+      lpTag.init();
+    } else {
+      window.lpTag._tagCount += 1;
+    }
+  </script>
+  <!-- END LivePerson Monitor. -->
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome to Kiran LP Brand</h1>
+    <p>Please log in</p>
+    <button id="loginBtn">Log in</button>
+  </div>
+
+  <script>
+    document.getElementById('loginBtn').addEventListener('click', function () {
+      // Hardcoded JWT for example purposes
+      const jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"; // Example JWT
+
+      // Save JWT to local storage
+      localStorage.setItem('jwt', jwt);
+
+      // Redirect to authenticated page
+      window.location.href = 'authentication.html';
+    });
+  </script>
+</body>
+</html>
